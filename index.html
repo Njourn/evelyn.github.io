@@ -1,3 +1,49 @@
-<input type="number" id="birthYear" placeholder="Enter your birth year">
-<button onclick="getZodiacSign()">Find My Zodiac Sign</button>
-<p id="zodiacResult"></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Zodiac Sign Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            margin-top: 10px;
+            padding: 10px;
+        }
+        #zodiacImage {
+            margin-top: 20px;
+            max-width: 200px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Your Chinese Zodiac Sign</h1>
+    <label for="birthYear">Enter your birth year:</label>
+    <input type="number" id="birthYear" placeholder="e.g., 1990">
+    <button onclick="findZodiac()">Find Sign</button>
+    <h2 id="result"></h2>
+    <img id="zodiacImage" src="" alt="Zodiac Sign Image">
+
+    <script>
+        function findZodiac() {
+            const year = document.getElementById("birthYear").value;
+            if (!year || year < 1900) {
+                document.getElementById("result").innerText = "Please enter a valid year (1900 or later).";
+                document.getElementById("zodiacImage").style.display = "none";
+                return;
+            }
+            const zodiacSigns = ["Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig"];
+            const index = (year - 1900) % 12;
+            const sign = zodiacSigns[index];
+            document.getElementById("result").innerText = "Your Chinese Zodiac sign is: " + sign;
+            document.getElementById("zodiacImage").src = `images/${sign.toLowerCase()}.png`;
+            document.getElementById("zodiacImage").style.display = "block";
+        }
+    </script>
+</body>
+</html>
